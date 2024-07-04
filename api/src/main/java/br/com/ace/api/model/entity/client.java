@@ -1,5 +1,6 @@
 package br.com.ace.api.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Table
 public class Client {
 
     @Id
@@ -22,8 +24,14 @@ public class Client {
     @Column(name = "document_type", nullable = false, length = 11)
     private String documentType;
 
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate registrationDate;
+
+    @PrePersist
+    public void prePersist(){
+        setRegistrationDate(LocalDate.now());
+    }
 
 
 }

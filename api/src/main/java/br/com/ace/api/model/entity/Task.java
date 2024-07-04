@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Table
 public class Task {
 
     @Id
@@ -24,5 +25,6 @@ public class Task {
     @JoinColumn(name = "id_client")
     private Client client;
 
+    @Column(name = "`VALUE`")
     private BigDecimal value;
 }
