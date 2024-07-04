@@ -3,6 +3,7 @@ package br.com.ace.api.controller;
 
 import br.com.ace.api.model.entity.Client;
 import br.com.ace.api.model.repository.ClientRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,9 @@ public class ClientController {
     @Autowired
     private ClientRepository repository;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save( @RequestBody Client client){
+    public Client save( @RequestBody @Valid  Client client){
         return repository.save(client);
     }
 
